@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ challenge.title }} — PhotoChamp{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h3 class="mt-5">Entries</h3>
+  {% if entries_page %}
+    <div class="row">
+      {% for entry in entries_page %}
+        <div class="col-md-6 mb-4">
+          <a href="{% url 'entries:detail' entry.pk %}" class="text-decoration-none">
+            <div class="card h-100">
+              <img src="{{ entry.image.url }}"
+                   class="card-img-top"
+                   style="object-fit:cover; max-height:40vh;">
+              <div class="card-body">
+                <h5 class="card-title">{{ entry.title }}</h5>
+                <p class="card-text text-muted">
+                  by {{ entry.user.username }} on {{ entry.submitted_at|date:"M j, Y" }}
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    {% include "includes/pagination.html" with page_obj=entries_page %}
+  {% else %}
+    <p class="text-muted">No entries yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

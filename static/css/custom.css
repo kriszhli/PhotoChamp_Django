@@ -1,0 +1,111 @@
+html, body {
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#sidebar .sidebar-logo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+#sidebar .sidebar-logo .project-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#sidebar .nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#sidebar .nav-item {
+  margin-bottom: 0.5rem;
+}
+
+#sidebar .nav-link {
+  display: block;
+  width: auto;
+  padding: 1rem;
+  margin: 0 1rem;
+  color: #ddd;
+  text-decoration: none;
+  border-radius: 1rem;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  text-align: left;
+}
+
+#sidebar .nav-link .bi {
+  font-size: 1.4rem;
+  margin-right: 0.75rem;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+  background-color: #222;
+  color: #fff;
+}
+
+#content-wrapper {
+  margin-left: 240px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #fafafa;
+}
+
+#main-content {
+  padding: 1rem;
+}
+
+
+body.login-page {
+  background: linear-gradient(
+    to right,
+    rgba(102, 126, 234, 0.3) 0%,
+    rgba(118, 75, 162, 0.3) 100%
+  );
+}
+
+body.login-page #content-wrapper {
+  margin-left: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: none;
+}
+
+body.login-page #main-content {
+  padding: 0;
+  background: none;
+}
+
+body.login-page .login-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 360px;
+  width: 90%;
+  margin: auto;
+}

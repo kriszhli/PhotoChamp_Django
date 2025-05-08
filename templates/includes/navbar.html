@@ -1,0 +1,77 @@
+{% load static %}
+
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <a href="{% url 'main:home' %}">
+      <img src="{% static 'images/logo.jpg' %}" alt="PhotoChamp" class="img-fluid">
+    </a>
+  </div>
+
+  {% url 'main:home'         as home_url %}
+  {% url 'challenges:list'   as challenges_url %}
+  {% url 'entries:list'      as entries_url %}
+  {% url 'useradmin:profile' as profile_url %}
+  {% url 'useradmin:login'   as login_url %}
+  {% url 'useradmin:logout'  as logout_url %}
+
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      {% if request.path == home_url %}
+        <a href="{{ home_url }}" class="nav-link active">
+      {% else %}
+        <a href="{{ home_url }}" class="nav-link">
+      {% endif %}
+          <i class="bi bi-house-door"></i>
+          Home
+        </a>
+    </li>
+
+    <li class="nav-item">
+      {% if request.path == challenges_url %}
+        <a href="{{ challenges_url }}" class="nav-link active">
+      {% else %}
+        <a href="{{ challenges_url }}" class="nav-link">
+      {% endif %}
+          <i class="bi bi-calendar-check"></i>
+          Challenges
+        </a>
+    </li>
+
+    <li class="nav-item">
+      {% if request.path == entries_url %}
+        <a href="{{ entries_url }}" class="nav-link active">
+      {% else %}
+        <a href="{{ entries_url }}" class="nav-link">
+      {% endif %}
+          <i class="bi bi-camera-reels"></i>
+          Entries
+        </a>
+    </li>
+
+    {% if user.is_authenticated %}
+      <li class="nav-item mt-3">
+        {% if request.path == profile_url %}
+          <a href="{{ profile_url }}" class="nav-link active">
+        {% else %}
+          <a href="{{ profile_url }}" class="nav-link">
+        {% endif %}
+            <i class="bi bi-person-circle"></i>
+            Profile
+          </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ logout_url }}" class="nav-link">
+          <i class="bi bi-box-arrow-right"></i>
+          Logout
+        </a>
+      </li>
+    {% else %}
+      <li class="nav-item mt-3">
+        <a href="{{ login_url }}" class="nav-link">
+          <i class="bi bi-box-arrow-in-right"></i>
+          Sign In
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</aside>

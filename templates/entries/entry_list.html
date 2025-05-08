@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}All Entries — PhotoChamp{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1>All Entries</h1>
+
+  <div class="row">
+    {% for entry in page_obj %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if entry.image %}
+            <img src="{{ entry.image.url }}"
+                 class="card-img-top"
+                 alt="{{ entry.title }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ entry.title }}</h5>
+            <p class="card-text text-muted">
+              {{ entry.submitted_at|date:"M j, Y" }} by {{ entry.user.username }}
+            </p>
+            <a href="{% url 'entries:detail' entry.pk %}"
+               class="btn btn-primary">
+              View
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No entries found.</p>
+    {% endfor %}
+  </div>
+
+  {% include "includes/pagination.html" with page_obj=page_obj %}
+</div>
+{% endblock %}

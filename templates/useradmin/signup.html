@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags static %}
+
+{% block extra_css %}
+  <link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Sign Up — PhotoChamp{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height:80vh;">
+  <div class="card auth-card" style="max-width:400px; width:100%;">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Create Account</h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ register_form|crispy }}
+        <button type="submit" class="btn btn-success w-100 mt-3">
+          Sign Up
+        </button>
+      </form>
+      <p class="text-center mt-3">
+        Already have an account?
+        <a href="{% url 'useradmin:login' %}">Sign In</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

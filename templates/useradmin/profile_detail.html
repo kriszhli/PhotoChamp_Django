@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ user.username }}’s Profile — PhotoChamp{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="card mx-auto" style="max-width: 600px;">
+    <div class="card-body text-center">
+
+      {% if user.profile.profile_pic %}
+        <img src="{{ user.profile.profile_pic.url }}"
+             class="rounded-circle mb-3"
+             width="120" height="120"
+             alt="{{ user.username }}’s profile picture">
+      {% else %}
+        <i class="bi bi-person-circle mb-3"
+           style="font-size:120px; color:#ccc;"></i>
+      {% endif %}
+
+      <h2>{{ user.username }}</h2>
+      <hr>
+
+      <h5>Bio</h5>
+      {% if user.profile.bio %}
+        <p class="text-muted">{{ user.profile.bio|linebreaks }}</p>
+      {% else %}
+        <p class="text-muted fst-italic">No bio provided.</p>
+      {% endif %}
+
+      <h5>Website</h5>
+      {% if user.profile.website %}
+        <p>
+          <a href="{{ user.profile.website }}" target="_blank">
+            {{ user.profile.website }}
+          </a>
+        </p>
+      {% else %}
+        <p class="text-muted fst-italic">No website provided.</p>
+      {% endif %}
+
+      <h5>Total login count:</h5>
+      <p><strong>{{ login_count }}</strong></p>
+
+      <a href="{% url 'useradmin:profile_edit' %}"
+         class="btn btn-outline-primary mt-4">
+        Edit Profile
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
